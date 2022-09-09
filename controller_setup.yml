@@ -1,0 +1,53 @@
+---
+controller_components:
+  - credentials
+  - organizations
+  - projects
+  - job_templates
+
+
+controller_credentials:
+  - name: Automation Hub
+    credential_type: Ansible Galaxy/Automation Hub API Token
+    organization: Default
+    update_secrets: false
+    inputs:
+      url: "{{ galaxy_server_url }}"
+      auth_url: "{{ auth_server_url }}"
+      token: "{{ api_token }}"
+
+  - name: AWS
+    credential_type: Amazon Web Services
+    organization: Default
+    update_secrets: false
+    inputs:
+      username: "{{ aws_access_key_id }}"
+      password: "{{ aws_secret_access_key }}"
+
+controller_organizations:
+  - name: Default
+    galaxy_credentials: 
+      - Automation Hub
+      - Ansible Galaxy
+    assign_galaxy_credentials_to_org: True
+
+controller_projects:    
+  - name: Ansible official demo project
+    organization: Default
+    scm_type: git
+    scm_url: https://github.com/msuzadail/product-demos.git
+    scm_branch: STIG
+
+controller_templates:
+  - name: SETUP
+    job_type: run
+    organization: Default
+    credentials:
+     - Controller Credential
+    project: Ansible official demo project
+    playbook: setup_demo.yml
+    inventory: Workshop Inventory
+    execution_environment: Control Plane Execution Environment
+    survey_enabled: true
+    extra_vars:
+      demo: cloud

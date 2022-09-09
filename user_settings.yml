@@ -1,0 +1,13 @@
+---
+controller_hostname: https://
+controller_username: admin
+controller_password: 
+
+aws_access_key_id:
+aws_secret_access_key: 
+
+galaxy_server_url: 
+auth_server_url: 
+api_token:
+
+

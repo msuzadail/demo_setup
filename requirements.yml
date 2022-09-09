@@ -1,0 +1,4 @@
+---
+collections:
+  - name: redhat_cop.controller_configuration
+  - name: ansible.controller
